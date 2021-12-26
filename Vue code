@@ -1,0 +1,38 @@
+### vue vuetify autocomplete english and bangla search
+<v-autocomplete
+                      v-model="districtModel"
+                      :items="districts"
+                      :filter="districtFilter"
+                      item-text="nameBN"
+                      label="জেলা"
+                      hint="বাংলা এবং ইংরেজি দুইভাবেই সার্চ করা যাবে"
+                      persistent-hint
+                      clearable
+                      :prepend-icon="mdiMap"
+                    ></v-autocomplete>
+data(){
+  return{
+    districtModel: null,
+  }
+}
+ watch:{
+      districtModel(val,oldval) {
+        let asd = this.districts.filter(e => e.nameBN === val);
+        if (asd.length > 0) {
+          this.page = 1;
+          this.$route.params.id = asd[0].nameEN;
+          this.$router.push({ name: "district-id", params: { id: asd[0].nameEN } });
+        }
+      }
+    },
+    
+methods: {
+  districtFilter (item, queryText, itemText) {
+        const textOne = item.nameEN.toLowerCase()
+        const textTwo = item.nameBN.toLowerCase()
+        const searchText = queryText.toLowerCase()
+        return textOne.indexOf(searchText) > -1 ||
+          textTwo.indexOf(searchText) > -1
+      },
+}
+##### End ########
