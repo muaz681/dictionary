@@ -12,3 +12,12 @@ https://github.com/cretueusebiu
 
 ##### Larave Spa step by step 
 https://medium.com/swlh/laravel-8-single-page-application-spa-with-vue-js-989a5d9d7c2
+
+#### Vue Loader Update
+  1. You need to update your vue-loader
+
+  = npm update vue-loader
+ 
+  2. And if it is not installed, install it
+
+  = npm i vue-loader
