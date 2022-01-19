@@ -21,3 +21,8 @@ https://medium.com/swlh/laravel-8-single-page-application-spa-with-vue-js-989a5d
   2. And if it is not installed, install it
 
   = npm i vue-loader
+
+#### Netflix image hover and slider
+1. https://vuejsexamples.com/a-netflix-clone-website-built-with-vue-and-tailwind/
+2. https://github.com/hoangvu12/cloneflix
+3. https://cloneflix-ashen.vercel.app/#/
