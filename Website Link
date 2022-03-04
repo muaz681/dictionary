@@ -31,3 +31,6 @@ https://medium.com/swlh/laravel-8-single-page-application-spa-with-vue-js-989a5d
   https://tailwindcss.com/docs/guides/laravel
 ### Html vue file
 https://developerlife.com/2018/08/15/introduction-to-vue/
+
+## composer code 
+composer update --ignore-platform-reqs
