@@ -1,1 +1,54 @@
 # http://cinebaz.com/en/login/apple
+{{-- <script>
+        function addListing(id) {
+            $('.list' + id).toggleClass('active');
+            $.ajax({
+                url: "{{ url('/frontend/ajax/listing') }}" + '/' + id,
+                success: function(result) {
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: 'Successfully Done!',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                }
+            });
+        }
+
+        function addFavorite(id) {
+            $('.fev' + id).toggleClass('active');
+            $.ajax({
+                url: "{{ url('/frontend/ajax/favorite') }}" + '/' + id,
+                type: 'get',
+                success: function(result) {
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: 'Successfully Done!',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                }
+            });
+        }
+    </script>
+    
+    <script>
+        function AddToCart(id) {
+
+            $.ajax({
+                url: "{{ url('/cart/add/') }}" + '/' + id,
+                type: 'get',
+                success: function(result) {
+                    $('.cart_items').html(result.content);
+                    console.log(result.content);
+                    setTimeout("$('.laraNoti').fadeOut('slow')", 2000);
+                    if (result.needLogin) {
+                        window.location.href = "{{ route('member.auth.showlogin', app()->getLocale()) }}";
+                    }
+
+                }
+            });
+        }
+    </script> --}}
