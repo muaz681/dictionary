@@ -37,3 +37,5 @@ composer update --ignore-platform-reqs
 
 ## Vh to px converter code example
 https://codepen.io/mooshmassacre/pen/xOMQLE
+
+middleware router nuxt vuetify and tailwind
