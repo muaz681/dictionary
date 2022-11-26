@@ -1,0 +1,11 @@
+## php current time dictionary
+<?php $date = Date::make($schedule->date)->format('l'); ?>
+<?php $day = Lang::get('date.day.'.$date); ?>
+{{ Date::make($schedule->date)->format('d M') }} {{ $day }}
+{{Date::make($schedule->date)->format('h:i')}}
+
+## Previous date data delete 
+Item::where('datetime', '<', Carbon::now())->each(function ($item) {
+         $item->delete();
+     });
+     
