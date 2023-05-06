@@ -1,0 +1,3 @@
+SELECT *
+FROM table_name
+WHERE strEmail = mail_address and DecryptByPassphrase('ERP', strPassword) = passowrd
