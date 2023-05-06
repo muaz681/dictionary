@@ -1,3 +1,6 @@
-SELECT *
-FROM table_name
-WHERE strEmail = mail_address and DecryptByPassphrase('ERP', strPassword) = passowrd
+## Password Dycrypt select query
+1.  SELECT *
+  FROM table_name
+  WHERE strEmail = mail_address and DecryptByPassphrase('ERP', strPassword) = passowrd
+  
+2.  SELECT CONVERT(varchar(max),DecryptByPassphrase ('ERP', (select strPassword from table_name where strEmail = mail_address )))
