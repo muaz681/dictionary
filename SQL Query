@@ -4,3 +4,6 @@
   WHERE strEmail = mail_address and DecryptByPassphrase('ERP', strPassword) = passowrd
   
 2.  SELECT CONVERT(varchar(max),DecryptByPassphrase ('ERP', (select strPassword from table_name where strEmail = mail_address )))
+
+## Multiple data user multiple data update query
+UPDATE table_name SET dteJoiningDate = CASE WHEN intEmployeeID = 558952 THEN '9/24/2023' WHEN intEmployeeID = 558879 THEN '8/16/2023' END WHERE intEmployeeID IN ( 558952, 558879 );
