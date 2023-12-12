@@ -1,0 +1,65 @@
+protected void btnSubmt_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                List<SelectedItem> selectedRows = new List<SelectedItem>();
+                for (int i = 0; i < assetGridviewID.Rows.Count; i++)
+                {
+                    CheckBox cv = (CheckBox)assetGridviewID.Rows[i].FindControl("chkbx");
+                    if (cv.Checked)
+                    {
+                        Label intEmpCodeLbl = (Label)assetGridviewID.Rows[i].FindControl("intEmployeeID");
+                        Label WordDateLbl = (Label)assetGridviewID.Rows[i].FindControl("WordDate");
+                        Label PresentWorkLbl = (Label)assetGridviewID.Rows[i].FindControl("PresentWork");
+                        Label NextWorkLbl = (Label)assetGridviewID.Rows[i].FindControl("NextWork");
+                        Label strRemarksLbl = (Label)assetGridviewID.Rows[i].FindControl("strRemarks");
+
+                        //DataRow row = dt.NewRow();
+                        //row["intEmployeeID"] = int.Parse(intEmpCodeLbl.Text.Trim());
+                        //row["WordDate"] = DateTime.Parse(WordDateLbl.Text.Trim());
+                        //row["PresentWork"] = PresentWorkLbl.Text.Trim();
+                        //row["NextWork"] = NextWorkLbl.Text.Trim();
+                        //row["strRemarks"] = strRemarksLbl.Text.Trim();
+
+                        SelectedItem item = new SelectedItem(int.Parse(intEmpCodeLbl.Text.Trim()), DateTime.Parse(WordDateLbl.Text.Trim()), PresentWorkLbl.Text.Trim(), NextWorkLbl.Text.Trim(), strRemarksLbl.Text.Trim());
+
+                        selectedRows.Add(item);
+                    }
+                }
+
+                
+                string json = JsonConvert.SerializeObject(selectedRows);
+
+                if (selectedRows.Count > 0)
+                {
+                    dt = bll.GetDepartmenttt(3, 0, DateTime.Now, 0, DateTime.Now, "", "", "", json);
+
+                    ScriptManager.RegisterStartupScript(Page, typeof(Page), "StartupScript", "alert('Inserted Successfully');", true);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterStartupScript(Page, typeof(Page), "StartupScript", "alert('Something wrong! Please try again');", true);
+            }
+        }
+    }
+
+
+    public class SelectedItem
+    {
+        public int EmployeeID { get; set; }
+        public DateTime WorkDate { get; set; }
+        public string PreWork { get; set; }
+        public string NextWork { get; set; }
+        public string Remarks { get; set; }
+
+        public SelectedItem(int employeeID, DateTime workDate, string preWork, string nextWork, string remarks)
+        {
+            EmployeeID = employeeID;
+            WorkDate = workDate;
+            PreWork = preWork;
+            NextWork = nextWork;
+            Remarks = remarks;
+        }
+    }
