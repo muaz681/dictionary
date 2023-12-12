@@ -7,3 +7,43 @@
 
 ## Multiple data user multiple data update query
 UPDATE table_name SET dteJoiningDate = CASE WHEN intEmployeeID = 558952 THEN '9/24/2023' WHEN intEmployeeID = 558879 THEN '8/16/2023' END WHERE intEmployeeID IN ( 558952, 558879 );
+
+## multiple data insert sql qury
+INSERT INTO table_name (intEmployeeID, WorkDate, PresentWork, NextWork, strRemarks)
+		SELECT EmployeeID, WorkDate, PreWork, NextWork,Remarks
+			FROM OPENJSON(@xml)
+			WITH (
+			  [EmployeeID] int,
+			  [WorkDate] DateTime,
+			  [PreWork] varchar(max),
+			  [NextWork] varchar(max),
+			  [Remarks] varchar(max));
+
+## Multiple data first delete then insert
+
+DECLARE @table TABLE (EmployeeID int, WorkDate DateTime, PreWork varchar(max), NextWork varchar(max), [Remarks] varchar(max))
+
+			INSERT INTO @table
+			SELECT EmployeeID, WorkDate, PreWork, NextWork, Remarks
+			FROM OPENJSON(@xml)
+			WITH (
+				[EmployeeID] int,
+				[WorkDate] DateTime,
+				[PreWork] varchar(max),
+				[NextWork] varchar(max),
+				[Remarks] varchar(max)
+			);
+
+			SELECT EmployeeID, WorkDate, PreWork, NextWork, Remarks FROM @table;
+
+			DELETE FROM ERP_HR.dbo.tblPriorityShortList
+			WHERE EXISTS (
+				SELECT 1
+				FROM @table t
+				WHERE t.EmployeeID = ERP_HR.dbo.tblPriorityShortList.intEmployeeID
+				  AND t.WorkDate = ERP_HR.dbo.tblPriorityShortList.WorkDate
+			);
+
+			INSERT INTO ERP_HR.dbo.tblPriorityShortList (intEmployeeID, WorkDate, PresentWork, NextWork, strRemarks)
+			SELECT EmployeeID, WorkDate, PreWork, NextWork, Remarks
+			FROM @table;
